@@ -6,3 +6,4 @@ const divide = (x,y) => y != 0 ? x/y : "You sneaky bastard -- you can't divide b
 const operate = function(op,x,y) {
     return op(x,y)
 };
+
