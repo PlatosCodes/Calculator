@@ -2,17 +2,23 @@
 height: auto;
 }
 
+html {
+    min-height: 100%;
+    background-image: url(https://wallpapercave.com/wp/Z0qsiGu.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+ }
+
 body{
     width: 100%;
     height: auto;
-    background-image: url(https://wallpapercave.com/wp/Z0qsiGu.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.6;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    opacity: 0.75;
 
 }
 
@@ -30,7 +36,6 @@ body{
 
 .screen img{
     width: 100%;
-    flex: auto;
 }
 
 .screen .screen-text{
