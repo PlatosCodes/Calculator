@@ -60,9 +60,11 @@ body{
 }
 
 .buttons button{
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 900;
-    margin: 0.5%;
+    margin: 0.4%;
     flex-basis: 24%;
     height: 100px;
 }
+
+.
