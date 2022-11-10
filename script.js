@@ -7,39 +7,116 @@ const subtract = (x,y) => x+y;
 const multiply = (x,y) => x*y;
 const divide = (x,y) => y != 0 ? x/y : "You sneaky bastard -- you can't divide by 0!";
 
-//Operate after receiving inputs
+//Performs operation after receiving inputs
 const operate = function(op,x,y) {
-    return op(x,y)
+    n = Number(x), m = Number(y)
+    reset()
+    if (op == 'add') {
+        screen.textContent = add(n,m);
+        return add(n,m);
+    } else if (op == "subtract") {
+        screen.textContent = subtract(n,m);
+        return subtract(n,m);
+    } else if (op == "multiply") {
+        screen.textContent = multiply(n,m);
+        return multiply(n,m);
+    } else {
+        screen.textContent = divide(n, m);
+        return divide(n,m);
+    }
 };
 
 //Turns Mathematic Functions into operator keys for Operate function
-var ops = [...document.querySelectorAll(".ops")];
-ops = ops.forEach(op => op.addEventListener('click', () => screen.textContent = (op.textContent)));
+var plus = document.querySelector('#add');
+plus.addEventListener('click', () => pressPlus());
+
+var sub = document.querySelector('#subtract');
+sub.addEventListener('click', () => pressSub());
+
+var mul = document.querySelector('#multiply');
+mul.addEventListener('click', () => pressMul());
+
+var divi = document.querySelector('#divide');
+divi.addEventListener('click', () => pressDivi());
+
+var justFinished = false
 
 var nums = [...document.querySelectorAll(".nums")];
-nums = nums.forEach(op => op.addEventListener('click', () => screen.textContent = (op.textContent)));
-
-const clear = document.querySelector("#clear").addEventListener('click', (op) => 
-    console.log((document.querySelector("#clear").id)));
-
-const equals = document.querySelector("#equals").addEventListener('click', pressEquals);
+nums = nums.forEach(op => op.addEventListener('click', () => (
+    ((screen.textContent == 0 || justFinished) ? ((screen.textContent = op.textContent) && (justFinished = false)) : (screen.textContent += op.textContent)
+))));
 
 
-//CLEAR ALL INPUTS WHEN DIVIDE BY 0 OCCURS (IN ADDITIO TO RETURNING THE CHEEKY MESSAGE)
+const clear = document.querySelector("#clear").addEventListener('click', () => ((screen.textContent = 0) && reset));
 
-var entered = false
 
-var get_num1 = function() {{
-    if (screen.textContent == 0) {
-        screen.textContent = op.textContent;
+const equals = document.querySelector("#equals").addEventListener('click', () => (
+    pressEqual()
+));
+
+
+var chosenOperator = null;
+var num1 = null;
+var num2 = null
+
+const reset = function() {
+    screen.textContent = 0, chosenOperator = null, num2 = null;
+}
+
+var pressPlus = function() {
+    if (num1) {
+        num1 = operate('add', num1, screen.textContent);
     } else {
-        screen.textContent += op.textContent;
+        num1 = screen.textContent;
+        chosenOperator = 'add';
     }
-    } 
+    justFinished = true;
 };
 
-var pressEquals = function() {
-    entered = true;
+var pressSub = function() {
+    if (num1) {
+        num1 = operate('subtract', num1, screen.textContent);
+    } else {
+        num1 = screen.textContent;
+        chosenOperator = 'subtract';
+    }
+    justFinished = true;
 };
 
+var pressMul = function() {
+    if (num1) {
+        num1 = operate('multiply', num1, screen.textContent);
+    } else {
+        num1 = screen.textContent;
+        chosenOperator = 'multiply';
+    }
+    justFinished = true;
+};
 
+var pressDivi = function() {
+    if (num1) {
+        num1 = operate('divide', num1, screen.textContent);
+    } else {
+        num1 = screen.textContent;
+        chosenOperator = 'divide';
+    }
+    justFinished = true;
+};
+
+var pressEqual = function() {
+    if (num1 && chosenOperator) {
+        num1 = operate(chosenOperator, num1, screen.textContent);
+        justFinished = true;
+    } else{
+    num1 = screen.textContent;
+    };
+}
+
+
+
+
+
+
+
+//TO-DO
+//CLEAR ALL INPUTS WHEN DIVIDE BY 0 OCCURS (IN ADDITION TO RETURNING THE CHEEKY MESSAGE)
