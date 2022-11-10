@@ -3,7 +3,7 @@ const screen = document.querySelector('.screen-text h1')
 
 //Calculator Functions
 const add = (x,y) => x+y;
-const subtract = (x,y) => x+y;
+const subtract = (x,y) => x-y;
 const multiply = (x,y) => x*y;
 const divide = (x,y) => y != 0 ? x/y : "You sneaky bastard -- you can't divide by 0!";
 
