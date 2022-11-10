@@ -9,19 +9,23 @@ const divide = (x,y) => y != 0 ? x/y : "You sneaky bastard -- you can't divide b
 
 //Performs operation after receiving inputs
 const operate = function(op,x,y) {
-    n = Number(x), m = Number(y)
-    reset()
+    n = Number(x), m = Number(y);
+    reset();
     if (op == 'add') {
         screen.textContent = add(n,m);
+        num1 = screen.textContent;
         return add(n,m);
     } else if (op == "subtract") {
         screen.textContent = subtract(n,m);
+        num1 = screen.textContent;
         return subtract(n,m);
     } else if (op == "multiply") {
         screen.textContent = multiply(n,m);
+        num1 = screen.textContent;
         return multiply(n,m);
     } else {
         screen.textContent = divide(n, m);
+        num1 = screen.textContent;
         return divide(n,m);
     }
 };
@@ -60,7 +64,7 @@ var num1 = null;
 var num2 = null
 
 const reset = function() {
-    screen.textContent = 0, chosenOperator = null, num2 = null;
+    screen.textContent = 0, chosenOperator = null, num1 = null, num2 = null;
 }
 
 var pressPlus = function() {
@@ -68,8 +72,8 @@ var pressPlus = function() {
         num1 = operate('add', num1, screen.textContent);
     } else {
         num1 = screen.textContent;
-        chosenOperator = 'add';
     }
+    chosenOperator = 'add';
     justFinished = true;
 };
 
@@ -78,8 +82,8 @@ var pressSub = function() {
         num1 = operate('subtract', num1, screen.textContent);
     } else {
         num1 = screen.textContent;
-        chosenOperator = 'subtract';
     }
+    chosenOperator = 'subtract';
     justFinished = true;
 };
 
@@ -88,8 +92,8 @@ var pressMul = function() {
         num1 = operate('multiply', num1, screen.textContent);
     } else {
         num1 = screen.textContent;
-        chosenOperator = 'multiply';
     }
+    chosenOperator = 'multiply';
     justFinished = true;
 };
 
@@ -98,14 +102,15 @@ var pressDivi = function() {
         num1 = operate('divide', num1, screen.textContent);
     } else {
         num1 = screen.textContent;
-        chosenOperator = 'divide';
     }
+    chosenOperator = 'divide';
     justFinished = true;
 };
 
 var pressEqual = function() {
     if (num1 && chosenOperator) {
-        num1 = operate(chosenOperator, num1, screen.textContent);
+        operate(chosenOperator, num1, screen.textContent);
+        num1 = null;
         justFinished = true;
     } else{
     num1 = screen.textContent;
